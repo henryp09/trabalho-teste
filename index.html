@@ -1,37 +1,108 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Quiz Clash Royale</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Quiz Clash Royale - Henrique</title>
+
+  <!-- Fontes -->
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="images/favicon.png" />
 </head>
 <body>
-  <div class="quiz-container">
-    <header>
-      <h1>Quiz Clash Royale</h1>
-    </header>
+  <div class="app">
 
-    <div id="quiz">
-      <p id="question"></p>
-      <div id="options" class="options"></div>
-      <button id="next-btn" class="hidden">Próxima Pergunta</button>
-    </div>
-
-    <div id="result" class="hidden">
-      <p id="ranking"></p>
-      <div id="chest-container">
-        <img src="images/chest.png" id="reward-chest" class="hidden" alt="Baú">
-        <div id="card-reward" class="hidden">
-          <div class="card-inner">
-            <div class="card-front">❓</div>
-            <div class="card-back"></div>
+    <!-- Tela Inicial -->
+    <section id="start-screen" class="panel active">
+      <div class="start-card">
+        <h1>Quiz Clash Royale</h1>
+        <p class="subtitle">Teste seus conhecimentos e ganhe prêmios!</p>
+        <div class="start-actions">
+          <button id="start-btn" class="btn primary">Jogar Agora</button>
+          <button id="how-btn" class="btn ghost">Como funciona</button>
+        </div>
+        <div class="meta">
+          <span>Desenvolvido por Henrique</span>
+          <div class="mute-control">
+            <button id="mute-btn" class="btn small">🔊</button>
           </div>
         </div>
       </div>
+    </section>
+
+    <!-- Quiz -->
+    <section id="quiz-screen" class="panel">
+      <header class="quiz-header">
+        <div id="progress-bar" class="progress-bar">
+          <div id="progress-fill"></div>
+        </div>
+        <div class="top-row">
+          <div id="qcount">Pergunta 1 / 4</div>
+          <div id="score-display">Pts: 0</div>
+        </div>
+      </header>
+
+      <main class="quiz-main">
+        <div id="question-card" class="card">
+          <p id="question" class="question-text"></p>
+
+          <div id="timer" class="timer">
+            <div id="timer-fill"></div>
+          </div>
+
+          <div id="options" class="options"></div>
+
+          <div class="controls">
+            <button id="next-btn" class="btn primary hidden">Próxima</button>
+          </div>
+        </div>
+      </main>
+    </section>
+
+    <!-- Resultado -->
+    <section id="result-screen" class="panel">
+      <div class="result-card">
+        <h2>Resultado</h2>
+        <p id="ranking" class="big"></p>
+        <p id="score-final" class="sub"></p>
+        <p id="best-score" class="sub"></p>
+
+        <div id="chest-container" class="chest-zone">
+          <img src="images/chest.png" id="reward-chest" class="chest" alt="Baú" />
+          <div id="card-reward" class="card-reward hidden">
+            <div class="card-inner">
+              <div class="card-front">❓</div>
+              <div class="card-back"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-actions">
+          <button id="play-again" class="btn primary">Jogar Novamente</button>
+          <button id="back-home" class="btn ghost">Voltar ao Menu</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal Como Funciona -->
+    <div id="how-modal" class="modal hidden">
+      <div class="modal-inner">
+        <h3>Como funciona</h3>
+        <ul>
+          <li>Você tem <strong>12 segundos</strong> para responder cada pergunta.</li>
+          <li>Pontos = <em>segundos restantes × 10</em> por resposta correta.</li>
+          <li>Ao final, abra o baú para ganhar uma carta aleatória.</li>
+          <li>Seu melhor placar é salvo localmente.</li>
+        </ul>
+        <button id="close-how" class="btn primary">Fechar</button>
+      </div>
     </div>
+
   </div>
 
+  <!-- Sons (carregados via JS) -->
   <script src="script.js"></script>
 </body>
 </html>
