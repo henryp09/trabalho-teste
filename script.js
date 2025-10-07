@@ -1,12 +1,9 @@
-/* ===== Perguntas ===== */
 const questions = [
   { question: "Qual é o custo de elixir do Golem?", options:[{text:"6",img:"images/6elixir.png"},{text:"7",img:"images/7elixir.png"},{text:"8",img:"images/8elixir.png"},{text:"9",img:"images/9elixir.png"}], answer:"8" },
   { question: "Qual dessas cartas é lendária?", options:[{text:"Gigante",img:"images/gigante.png"},{text:"Mineiro",img:"images/mineiro.png"},{text:"Mosqueteira",img:"images/mosqueteira.png"},{text:"Valquíria",img:"images/valquiria.png"}], answer:"Mineiro" },
   { question: "Qual feitiço causa dano em área?", options:[{text:"Flechas",img:"images/flechas.png"},{text:"Barril de Goblins",img:"images/barril.png"},{text:"Espírito de Gelo",img:"images/espirito.png"},{text:"Gigante Real",img:"images/gigante-real.png"}], answer:"Flechas" },
   { question: "Qual carta tem menor custo de elixir?", options:[{text:"Arqueiras",img:"images/arqueiras.png"},{text:"Cavaleiro",img:"images/cavaleiro.png"},{text:"Esqueletos",img:"images/esqueletos.png"},{text:"Mini P.E.K.K.A",img:"images/minipekka.png"}], answer:"Esqueletos" }
 ];
-
-/* ===== DOM ===== */
 const startScreen = document.getElementById('start-screen');
 const startBtn = document.getElementById('start-btn');
 const howBtn = document.getElementById('how-btn');
@@ -30,20 +27,12 @@ const cardBack = cardReward.querySelector('.card-back');
 const playAgainBtn = document.getElementById('play-again');
 const backHomeBtn = document.getElementById('back-home');
 const muteBtn = document.getElementById('mute-btn');
-
-/* ===== Estado ===== */
 let currentQuestion=0, score=0, timePerQuestion=12, timeLeft=timePerQuestion, timerInterval=null, isMuted=false;
-
-/* ===== Sons ===== */
 const sounds = { bg:'sounds/bg_music.mp3', click:'sounds/click.mp3', correct:'sounds/correct.mp3', wrong:'sounds/wrong.mp3', chest:'sounds/chest.mp3' };
 const audio = { bg:new Audio(sounds.bg), click:new Audio(sounds.click), correct:new Audio(sounds.correct), wrong:new Audio(sounds.wrong), chest:new Audio(sounds.chest) };
 audio.bg.loop=true; audio.bg.volume=0.25;
 function playSound(name){ if(isMuted)return; const a=audio[name]; if(!a)return; a.currentTime=0; a.play().catch(()=>{}); }
-
-/* ===== Navegação ===== */
 function showScreen(el){ document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active')); el.classList.add('active'); }
-
-/* ===== Quiz ===== */
 startBtn.addEventListener('click',()=>{playSound('click'); startQuiz();});
 function startQuiz(){ currentQuestion=0; score=0; updateScoreUI(); progressFill.style.width='0%'; showScreen(quizScreen); if(!isMuted) audio.bg.play().catch(()=>{}); loadQuestion(); }
 
@@ -85,8 +74,6 @@ nextBtn.addEventListener('click',()=>{
 });
 
 function updateScoreUI(){ scoreDisplay.textContent=`Pts: ${score}`; }
-
-/* ===== Resultado ===== */
 function showResult(){
   clearInterval(timerInterval); showScreen(resultScreen);
   const maxPossible=questions.length*(timePerQuestion*10);
@@ -96,12 +83,8 @@ function showResult(){
   rankingEl.textContent=title; scoreFinalEl.textContent=`Você marcou ${score} pontos.`; bestScoreEl.textContent=`Melhor placar: ${saveAndGetBest(score)} pontos`;
   chestEl.classList.remove('hidden'); cardReward.classList.add('hidden');
 }
-
-/* ===== LocalStorage ===== */
 const LS_KEY='clashQuizBest';
 function saveAndGetBest(current){ const stored=Number(localStorage.getItem(LS_KEY)||'0'); if(current>stored)localStorage.setItem(LS_KEY,String(current)); return Math.max(current,stored); }
-
-/* ===== Baú e recompensa ===== */
 const rewards=[{type:"Comum",img:"images/common_card.png"},{type:"Rara",img:"images/rare_card.png"},{type:"Épica",img:"images/epic_card.png"},{type:"Lendária",img:"images/legendary_card.png"}];
 chestEl.addEventListener('click',()=>{
   playSound('chest'); chestEl.classList.add('hidden'); cardReward.classList.remove('hidden');
@@ -109,17 +92,10 @@ chestEl.addEventListener('click',()=>{
 });
 function weightedRandom(){ const rnd=Math.random()*100; if(rnd<=50) return rewards[0]; if(rnd<=80) return rewards[1]; if(rnd<=95) return rewards[2]; return rewards[3]; }
 
-/* ===== Play again / back home ===== */
 playAgainBtn.addEventListener('click',()=>{ playSound('click'); startQuiz(); });
 backHomeBtn.addEventListener('click',()=>{ playSound('click'); showScreen(startScreen); audio.bg.pause(); });
-
-/* ===== Mute ===== */
 muteBtn.addEventListener('click',()=>{ isMuted=!isMuted; muteBtn.textContent=isMuted?'🔈':'🔊'; if(isMuted) audio.bg.pause(); else audio.bg.play().catch(()=>{}); });
-
-/* ===== Modal ===== */
 howBtn.addEventListener('click',()=>{ howModal.classList.remove('hidden'); });
 closeHow.addEventListener('click',()=>{ howModal.classList.add('hidden'); });
 howModal.addEventListener('click',e=>{ if(e.target===howModal) howModal.classList.add('hidden'); });
-
-/* ===== Inicialização ===== */
 showScreen(startScreen); document.getElementById('how-modal')?.classList.add('hidden');
