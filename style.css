@@ -1,145 +1,108 @@
+/* ===== Reset básico ===== */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+/* ===== Body ===== */
 body {
-    font-family: 'Arial', sans-serif;
-    background: url("images/arena.jpg") no-repeat center center fixed;
-    background-size: cover;
-    color: white;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .quiz-container {
-    background: rgba(0, 0, 0, 0.85);
-    padding: 25px;
-    border-radius: 20px;
-    width: 90%;
-    max-width: 500px;
-    text-align: center;
-  }
-  
-  h1 {
-    color: #ffcc00;
-    margin-bottom: 20px;
-  }
-  
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-  
-  .option-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: #2980b9;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-  
-  .option-btn img {
-    width: 50px;
-    height: 50px;
-    border-radius: 8px;
-  }
-  
-  .option-btn:hover {
-    background: #1f5f8a;
-  }
-  
-  .correct {
-    background: #27ae60 !important;
-  }
-  
-  .wrong {
-    background: #c0392b !important;
-  }
-  
-  #next-btn {
-    margin-top: 20px;
-    background: #f39c12;
-    color: black;
-    padding: 10px 20px;
-    border-radius: 12px;
-    cursor: pointer;
-    border: none;
-    font-weight: bold;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  #result {
-    font-size: 1.4rem;
-    margin-top: 20px;
-    color: #ffcc00;
-  }
-  
-  #reward-chest {
-    width: 120px;
-    cursor: pointer;
-    margin-top: 20px;
-    transition: transform 0.3s;
-  }
-  
-  #reward-chest:hover {
-    transform: scale(1.1);
-  }
-  
-  #card-reward {
-    width: 120px;
-    height: 170px;
-    perspective: 1000px;
-    margin: 20px auto 0 auto;
-  }
-  
-  .card-inner {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.8s;
-  }
-  
-  .card-front, .card-back {
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    backface-visibility: hidden;
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: white;
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  }
-  
-  .card-front {
-    background: #444;
-  }
-  
-  .card-back {
-    transform: rotateY(180deg);
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-  }
-  
-  .flip .card-inner {
-    transform: rotateY(180deg);
-  }
-  
+  font-family: 'Poppins', sans-serif;
+  background: url("images/arena.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* ===== Containers ===== */
+.panel { display: none; }
+.panel.active { display: block; }
+
+.start-card, .result-card, .card {
+  background: rgba(0,0,0,0.85);
+  border-radius: 20px;
+  padding: 25px;
+  text-align: center;
+  max-width: 500px;
+  margin: auto;
+}
+
+/* ===== Títulos ===== */
+h1 { color: #ffcc00; font-family: 'Bangers', cursive; margin-bottom: 15px; }
+h2, h3 { color: #ffcc00; margin-bottom: 15px; }
+
+/* ===== Botões ===== */
+.btn {
+  padding: 10px 20px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn.primary { background: #f39c12; color: black; }
+.btn.primary:hover { background: #e67e22; }
+.btn.ghost { background: transparent; border: 2px solid #f39c12; color: #f39c12; }
+.btn.ghost:hover { background: #f39c12; color: black; }
+.btn.small { padding: 5px 10px; font-size: 0.8rem; }
+
+/* ===== Opções do quiz ===== */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 15px;
+}
+.option-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #2980b9;
+  color: white;
+  padding: 10px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.option-btn:hover { background: #1f5f8a; }
+.option-btn img { width: 50px; height: 50px; border-radius: 8px; }
+.correct { background: #27ae60 !important; }
+.wrong { background: #c0392b !important; }
+
+/* ===== Timer ===== */
+.timer { width: 100%; height: 8px; background: #555; border-radius: 4px; margin-top: 10px; }
+#timer-fill { height: 100%; width: 100%; background: linear-gradient(90deg,#ffa502,#ffb86b); border-radius: 4px; transition: width 0.25s; }
+
+/* ===== Resultado / Chest ===== */
+.chest-zone { margin-top: 20px; }
+#reward-chest { width: 120px; cursor: pointer; transition: transform 0.3s; }
+#reward-chest:hover { transform: scale(1.1); }
+
+.card-reward { width: 120px; height: 170px; perspective: 1000px; margin: 20px auto 0 auto; }
+.card-inner { width: 100%; height: 100%; position: relative; transform-style: preserve-3d; transition: transform 0.8s; }
+.card-front, .card-back {
+  width: 100%; height: 100%; border-radius: 12px; backface-visibility: hidden;
+  position: absolute; top: 0; left: 0; display: flex; justify-content: center; align-items: center;
+  font-weight: bold; color: white; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+}
+.card-front { background: #444; }
+.card-back { transform: rotateY(180deg); background-size: cover; background-position: center; }
+.flip .card-inner { transform: rotateY(180deg); }
+
+/* ===== Modal ===== */
+.modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.75);
+  display: flex; justify-content: center; align-items: center;
+  opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
+}
+.modal:not(.hidden) { opacity: 1; pointer-events: auto; }
+.modal-inner {
+  background: #111; padding: 25px 20px; border-radius: 15px;
+  max-width: 400px; width: 90%; text-align: center; position: relative; z-index: 1010;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.modal-inner ul { text-align: left; margin: 15px 0; padding-left: 20px; color: #fff; }
+.modal-inner ul li { margin-bottom: 10px; }
+.modal-inner button { margin-top: 15px; padding: 8px 18px; border-radius: 12px; cursor: pointer; font-weight: bold; font-family: 'Poppins', sans-serif; background: #f39c12; color: black; border: none; transition: 0.3s; }
+.modal-inner button:hover { background: #e67e22; }
