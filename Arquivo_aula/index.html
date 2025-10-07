@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz Clash Royale</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="quiz-container">
+    <header>
+      <h1>Quiz Clash Royale</h1>
+    </header>
+
+    <div id="quiz">
+      <p id="question"></p>
+      <div id="options" class="options"></div>
+      <button id="next-btn" class="hidden">Próxima Pergunta</button>
+    </div>
+
+    <div id="result" class="hidden">
+      <p id="ranking"></p>
+      <div id="chest-container">
+        <img src="images/chest.png" id="reward-chest" class="hidden" alt="Baú">
+        <div id="card-reward" class="hidden">
+          <div class="card-inner">
+            <div class="card-front">❓</div>
+            <div class="card-back"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
